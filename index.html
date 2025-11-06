@@ -135,15 +135,19 @@
 
 
 <div class="result">
-    <h3>💰 Total com desconto</h3>
-    <input type="text" id="totalDesconto" readonly>
+  <h3>💰 Total com desconto</h3>
+  <input type="text" id="totalDesconto" readonly>
 
-    <h3>🧰 Lucro do Mecânico</h3>
-    <input type="text" id="lucroReais" readonly>
+  <h3>💼 Lucro do Mecânico</h3>
+  <input type="text" id="lucroReais" readonly>
 
-    <h3>💵 Total a Cobrar</h3>
-    <input type="text" id="totalFinal" readonly>
+  <h3>💵 Total a Cobrar</h3>
+  <input type="text" id="totalFinal" readonly>
+
+  <!-- Botão agora dentro do quadro -->
+  <button class="calculate-btn" onclick="calcularTotal()">Calcular Total</button>
 </div>
+
 
 <script>
 function calcularTotal() {
@@ -166,7 +170,8 @@ function calcularTotal() {
 
 </body>
 </html>
-<button class="calculate-btn" onclick="calcularTotal()">Calcular Total</button>
+
+
 
 
 
