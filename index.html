@@ -135,41 +135,41 @@
 
 
 <div class="result">
-  <h3>💰 Total com desconto</h3>
-  <input type="text" id="totalDesconto" readonly>
+    <h3>💰 Total com desconto</h3>
+    <input type="text" id="totalDesconto" readonly>
 
-  <h3>💼 Lucro do Mecânico</h3>
-  <input type="text" id="lucroReais" readonly>
+    <h3>💼 Lucro do Mecânico</h3>
+    <input type="text" id="lucroReais" readonly>
 
-  <h3>💵 Total a Cobrar</h3>
-  <input type="text" id="totalFinal" readonly>
+    <h3>💵 Total a Cobrar</h3>
+    <input type="text" id="totalFinal" readonly>
 
-  <!-- Botão agora dentro do quadro -->
-  <button class="calculate-btn" onclick="calcularTotal()">Calcular Total</button>
-</div>
+    <!-- Botão dentro do quadro -->
+    <button class="calculate-btn" onclick="calcularTotal()">Calcular Total</button>
+  </div>
 
+  <script>
+    function calcularTotal() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      let subtotal = 0;
+      checkboxes.forEach(c => subtotal += Number(c.value));
 
-<script>
-function calcularTotal() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let subtotal = 0;
-    checkboxes.forEach(c => subtotal += Number(c.value));
+      const lucro = parseFloat(document.getElementById("lucro").value) || 0;
+      const desconto = parseFloat(document.getElementById("desconto").value) || 0;
 
-    const lucro = parseFloat(document.getElementById("lucro").value) || 0;
-    const desconto = parseFloat(document.getElementById("desconto").value) || 0;
+      const totalComDesconto = subtotal - (subtotal * desconto / 100);
+      const valorLucro = totalComDesconto * (lucro / 100);
+      const totalFinal = totalComDesconto + valorLucro;
 
-    const totalComDesconto = subtotal - (subtotal * desconto / 100);
-    const valorLucro = totalComDesconto * (lucro / 100);
-    const totalFinal = totalComDesconto + valorLucro;
-
-    document.getElementById("totalDesconto").value = "R$ " + totalComDesconto.toLocaleString("pt-BR", {minimumFractionDigits: 2});
-    document.getElementById("lucroReais").value = "R$ " + valorLucro.toLocaleString("pt-BR", {minimumFractionDigits: 2});
-    document.getElementById("totalFinal").value = "R$ " + totalFinal.toLocaleString("pt-BR", {minimumFractionDigits: 2});
-}
-</script>
+      document.getElementById("totalDesconto").value = "R$ " + totalComDesconto.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+      document.getElementById("lucroReais").value = "R$ " + valorLucro.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+      document.getElementById("totalFinal").value = "R$ " + totalFinal.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+    }
+  </script>
 
 </body>
 </html>
+
 
 
 
