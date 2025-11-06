@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Bella Motors</title>
+<style>
+    body {
+        background-color: #121212;
+        color: #f1c40f;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: #f1c40f;
+        margin-bottom: 20px;
+    }
+    .section {
+        border: 1px solid #f1c40f;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px auto;
+        width: 90%;
+        max-width: 600px;
+        text-align: left;
+        background-color: #1c1c1c;
+    }
+    label {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        color: #fff;
+    }
+    input[type="checkbox"] {
+        transform: scale(1.2);
+        margin-right: 10px;
+    }
+    .calculate-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .calculate-btn:hover {
+        background-color: #c0392b;
+    }
+    .result {
+        margin-top: 20px;
+        background-color: #222;
+        border-radius: 10px;
+        padding: 15px;
+        display: inline-block;
+        width: 90%;
+        max-width: 600px;
+    }
+    .result input {
+        width: 100%;
+        background: #000;
+        color: #0f0;
+        border: none;
+        font-size: 18px;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .inputs-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .inputs-row input {
+        width: 48%;
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>Calculadora Bella Motors</h1>
+
+<div class="section">
+    <h3>🔧 Freios</h3>
+    <label><span>Pastilhas — R$ 12.000</span> <input type="checkbox" value="12000"></label>
+    <label><span>Discos — R$ 15.000</span> <input type="checkbox" value="15000"></label>
+</div>
+
+<div class="section">
+    <h3>⚙️ Motor</h3>
+    <label><span>Troca completa — R$ 20.000</span> <input type="checkbox" value="20000"></label>
+    <label><span>Reparo parcial — R$ 8.000</span> <input type="checkbox" value="8000"></label>
+</div>
+
+<div class="section">
+    <h3>🛞 Suspensão</h3>
+    <label><span>Amortecedores — R$ 10.000</span> <input type="checkbox" value="10000"></label>
+    <label><span>Molas — R$ 6.000</span> <input type="checkbox" value="6000"></label>
+</div>
+
+<div class="section">
+    <h3>🛡️ Blindagem</h3>
+    <label><span>Nível 1 — R$ 30.000</span> <input type="checkbox" value="30000"></label>
+    <label><span>Nível 2 — R$ 45.000</span> <input type="checkbox" value="45000"></label>
+</div>
+
+<div class="section">
+    <h3>💎 Personalização</h3>
+    <label><span>Pintura especial — R$ 5.000</span> <input type="checkbox" value="5000"></label>
+    <label><span>Interior premium — R$ 12.000</span> <input type="checkbox" value="12000"></label>
+</div>
+
+<div class="section">
+    <h3>⚡ Elétrica</h3>
+    <label><span>Bateria — R$ 3.000</span> <input type="checkbox" value="3000"></label>
+    <label><span>Revisão completa — R$ 7.000</span> <input type="checkbox" value="7000"></label>
+</div>
+
+<div class="section">
+    <div class="inputs-row">
+        <input type="number" id="lucro" placeholder="Lucro do Mecânico (%)" min="0">
+        <input type="number" id="desconto" placeholder="Desconto (%)" min="0">
+    </div>
+</div>
+
+<button class="calculate-btn" onclick="calcularTotal()">Calcular Total</button>
+
+<div class="result">
+    <h3>💰 Total com desconto</h3>
+    <input type="text" id="totalDesconto" readonly>
+
+    <h3>🧰 Lucro do Mecânico</h3>
+    <input type="text" id="lucroReais" readonly>
+
+    <h3>💵 Total a Cobrar</h3>
+    <input type="text" id="totalFinal" readonly>
+</div>
+
+<script>
+function calcularTotal() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    let subtotal = 0;
+    checkboxes.forEach(c => subtotal += Number(c.value));
+
+    const lucro = parseFloat(document.getElementById("lucro").value) || 0;
+    const desconto = parseFloat(document.getElementById("desconto").value) || 0;
+
+    const totalComDesconto = subtotal - (subtotal * desconto / 100);
+    const valorLucro = totalComDesconto * (lucro / 100);
+    const totalFinal = totalComDesconto + valorLucro;
+
+    document.getElementById("totalDesconto").value = "R$ " + totalComDesconto.toLocaleString("pt-BR", {minimumFractionDigits: 2});
+    document.getElementById("lucroReais").value = "R$ " + valorLucro.toLocaleString("pt-BR", {minimumFractionDigits: 2});
+    document.getElementById("totalFinal").value = "R$ " + totalFinal.toLocaleString("pt-BR", {minimumFractionDigits: 2});
+}
+</script>
+
+</body>
+</html>
